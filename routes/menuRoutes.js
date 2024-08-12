@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 // ----- Get method for show menu -----
 router.get("/", async (req, res) => {
   try {
-    const menus = await menu.find({});
+    const menus = await menu.find();
     res.json(menus);
   } catch (error) {
     console.error(error);
