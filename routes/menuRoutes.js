@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const menu = require("../model/menu");
 
+// ----- post method for show users -----
+// ----- Get method for show users -----
 router.post("/", async (req, res) => {
   try {
     const newMenu = await menu.create(req.body);
