@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const user = require("../model/user");
 
-// ----- Post method for add users -----
+// ----- Post method for add users 'C'-----
 router.post("/", async (req, res) => {
   try {
     const newUser = await user.create(req.body);
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ----- Get method for show users -----
+// ----- Get method for show users 'R'-----
 router.get("/", async (req, res) => {
   try {
     const users = await user.find({});
@@ -34,7 +34,7 @@ router.get("/:work", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-// ----- put method for update users -----
+// ----- put method for update users 'U'-----
 router.put("/:id", async (req, res) => {
   try {
     const updatedUser = await user.findByIdAndUpdate(req.params.id, req.body, {
@@ -44,6 +44,21 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// ----- Delete method for delete users 'D'-----
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedUser = await user.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
